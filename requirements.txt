@@ -1,0 +1,25 @@
+# Core Libraries
+pandas
+numpy
+matplotlib
+seaborn
+
+# API and Environment
+python-dotenv
+requests
+yfinance
+matplotlib
+
+# RL and Modeling
+torch
+ray[rllib]
+gymnasium
+
+# Jupyter Notebooks
+notebook
+
+# Testing
+pytest
+
+# Optional (for logging)
+pyyaml

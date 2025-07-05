@@ -1,0 +1,5 @@
+# YAML config
+algorithm: PPO
+lr: 0.0001
+gamma: 0.99
+batch_size: 32

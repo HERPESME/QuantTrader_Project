@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantTrader - Complete System Documentation</title>
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 2cm;
+            }
+            body {
+                font-size: 12pt;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            page-break-after: avoid;
+        }
+        
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+            page-break-after: avoid;
+        }
+        
+        h3 {
+            color: #2c3e50;
+            page-break-after: avoid;
+        }
+        
+        h4 {
+            color: #34495e;
+            page-break-after: avoid;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+            page-break-inside: avoid;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 15px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        .toc {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin: 5px 0;
+        }
+        
+        .toc a {
+            text-decoration: none;
+            color: #3498db;
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+        }
+        
+        .info-box {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .warning-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .success-box {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .flow-diagram {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8em;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        
+        .architecture-diagram {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8em;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .print-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button no-print" onclick="window.print()">🖨️ Print to PDF</button>
+    
+    <div class="header">
+        <h1>QuantTrader</h1>
+        <h2>Complete System Documentation</h2>
+        <p>Reinforcement Learning Trading Agent</p>
+        <p><em>Generated on <span id="timestamp"></span></em></p>
+    </div>
+
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+            <li><a href="#overview">1. Project Overview</a></li>
+            <li><a href="#architecture">2. System Architecture</a></li>
+            <li><a href="#dataflow">3. Data Flow Diagram</a></li>
+            <li><a href="#process">4. Step-by-Step Process</a></li>
+            <li><a href="#components">5. Code Components</a></li>
+            <li><a href="#specs">6. Technical Specifications</a></li>
+            <li><a href="#config">7. Configuration Management</a></li>
+            <li><a href="#deployment">8. Deployment Guide</a></li>
+        </ul>
+    </div>
+
+    <section id="overview">
+        <h1>1. Project Overview</h1>
+        
+        <div class="info-box">
+            <strong>QuantTrader</strong> is a deep reinforcement learning agent that autonomously learns to trade stocks for maximum profit using historical and real-time market data. It leverages custom Gym environments and RLlib (Ray) to train, simulate, and optionally paper trade in real-time.
+        </div>
+
+        <h2>Key Features</h2>
+        <ul>
+            <li>PPO-based stock trading agent</li>
+            <li>Yahoo Finance integration for historical and real-time data</li>
+            <li>Real-time price streaming support for paper/live trading</li>
+            <li>Custom OpenAI Gym-compatible trading environment</li>
+            <li>Reward shaping with transaction costs and portfolio tracking</li>
+            <li>Modular codebase for training, inference, and evaluation</li>
+            <li>Jupyter notebooks for EDA and visualization</li>
+            <li>Config-driven setup for reproducibility</li>
+        </ul>
+
+        <h2>Tech Stack</h2>
+        <ul>
+            <li><strong>Python, PyTorch</strong> - Core ML framework</li>
+            <li><strong>Ray + RLlib</strong> - Distributed reinforcement learning</li>
+            <li><strong>OpenAI Gym</strong> - Environment interface</li>
+            <li><strong>Yahoo Finance (yfinance)</strong> - Market data source</li>
+            <li><strong>Pandas, NumPy, Matplotlib</strong> - Data processing and visualization</li>
+            <li><strong>YAML</strong> - Configuration management</li>
+        </ul>
+    </section>
+
+    <section id="architecture">
+        <h1>2. System Architecture</h1>
+        
+        <div class="architecture-diagram">
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Data Layer    │    │  Training Layer │    │ Evaluation Layer│
+│                 │    │                 │    │                 │
+│ • Yahoo Finance │    │ • PPO Algorithm │    │ • Model Loading │
+│ • Historical    │    │ • Neural Network│    │ • Paper Trading │
+│ • Real-time     │    │ • Environment   │    │ • Performance   │
+│ • Live Plotting │    │ • Ray RLlib     │    │ • Visualization │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         └───────────────────────┼───────────────────────┘
+                                 │
+                    ┌─────────────────┐
+                    │  Configuration  │
+                    │     Layer       │
+                    │                 │
+                    │ • env.yaml      │
+                    │ • train.yaml    │
+                    │ • logging.yaml  │
+                    └─────────────────┘
+        </div>
+    </section>
+
+    <section id="dataflow">
+        <h1>3. Data Flow Diagram</h1>
+        
+        <div class="flow-diagram">
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           QUANTTRADER DATA FLOW                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│   YAHOO     │    │  HISTORICAL │    │  REAL-TIME  │    │   LIVE      │
+│  FINANCE    │───▶│    DATA     │───▶│   STREAM    │───▶│  PLOTTING   │
+│    API      │    │  PIPELINE   │    │             │    │             │
+└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
+       │                   │                   │                   │
+       │                   ▼                   ▼                   ▼
+       │            ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+       │            │   AAPL.CSV  │    │  PRICE      │    │  INTERACTIVE│
+       │            │             │    │  UPDATES    │    │    PLOT     │
+       │            └─────────────┘    └─────────────┘    └─────────────┘
+       │                   │
+       ▼                   ▼
+┌─────────────┐    ┌─────────────┐
+│  TRADING    │    │  ENVIRONMENT│
+│ ENVIRONMENT │◀───│   CREATION  │
+│             │    │             │
+│ • State     │    │ • OHLCV     │
+│ • Actions   │    │ • Window    │
+│ • Rewards   │    │ • Features  │
+└─────────────┘    └─────────────┘
+       │                   │
+       ▼                   ▼
+┌─────────────┐    ┌─────────────┐
+│   PPO       │    │  NEURAL     │
+│  AGENT      │◀───│  NETWORK    │
+│             │    │             │
+│ • Policy    │    │ • [256,256] │
+│ • Learning  │    │ • ReLU      │
+│ • Updates   │    │ • PyTorch   │
+└─────────────┘    └─────────────┘
+       │
+       ▼
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│  TRAINING   │    │  LOGGING    │    │ EVALUATION  │
+│   LOOP      │───▶│  CALLBACK   │───▶│   & RUN     │
+│             │    │             │    │             │
+│ • Episodes  │    │ • Rewards   │    │ • Checkpoint│
+│ • Batches   │    │ • Profits   │    │ • Paper     │
+│ • Updates   │    │ • CSV Log   │    │   Trading   │
+└─────────────┘    └─────────────┘    └─────────────┘
+       │                   │                   │
+       ▼                   ▼                   ▼
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│ CHECKPOINT  │    │ RESULTS.CSV │    │ PERFORMANCE│
+│   SAVE      │    │             │    │  METRICS    │
+└─────────────┘    └─────────────┘    └─────────────┘
+        </div>
+    </section>
+
+    <section id="process">
+        <h1>4. Step-by-Step Process</h1>
+
+        <h2>Phase 1: Data Collection & Preparation</h2>
+
+        <h3>Step 1: Historical Data Fetching</h3>
+        <div class="highlight">
+            <strong>File:</strong> <code>src/data/data_pipeline.py</code><br>
+            <strong>Process Flow:</strong>
+            <ol>
+                <li>Connect to Yahoo Finance API via yfinance</li>
+                <li>Download AAPL stock data from 2018-01-01 to present</li>
+                <li>Extract OHLCV (Open, High, Low, Close, Volume) data</li>
+                <li>Save to data/historical/AAPL.csv</li>
+                <li>Handle missing data with dropna()</li>
+            </ol>
+        </div>
+
+        <h3>Step 2: Real-Time Data Streaming</h3>
+        <div class="highlight">
+            <strong>File:</strong> <code>src/data/realtime_stream.py</code><br>
+            <strong>Process Flow:</strong>
+            <ol>
+                <li>Fetch 1-minute interval data for last 24 hours</li>
+                <li>Extract latest closing price</li>
+                <li>Print timestamp and price every 60 seconds</li>
+                <li>Run for 5 minutes by default</li>
+                <li>Include retry logic for failed API calls</li>
+            </ol>
+        </div>
+
+        <h3>Step 3: Live Price Plotting</h3>
+        <div class="highlight">
+            <strong>File:</strong> <code>src/data/live_plot.py</code><br>
+            <strong>Process Flow:</strong>
+            <ol>
+                <li>Create interactive matplotlib plot</li>
+                <li>Update price line in real-time</li>
+                <li>Maintain rolling window of last 100 data points</li>
+                <li>Format timestamps on x-axis</li>
+                <li>Auto-scale y-axis as prices change</li>
+            </ol>
+        </div>
+
+        <h2>Phase 2: Environment Setup</h2>
+
+        <h3>Step 4: Trading Environment Creation</h3>
+        <div class="highlight">
+            <strong>File:</strong> <code>src/env/stock_trading_env.py</code><br>
+            <strong>Environment Initialization:</strong>
+            <ol>
+                <li>Create Gym-compatible environment</li>
+                <li>Set up action space: [0=Hold, 1=Buy, 2=Sell]</li>
+                <li>Set up observation space: [window_size * 5 features]</li>
+                <li>Initialize trading parameters:
+                    <ul>
+                        <li>Initial balance: $10,000</li>
+                        <li>Transaction cost: 0.1%</li>
+                        <li>Window size: 10 time steps</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <h3>State Observation Generation</h3>
+        <div class="info-box">
+            <strong>State Creation Process:</strong>
+            <ol>
+                <li>Take sliding window of last 10 time steps</li>
+                <li>Extract OHLCV data for each step</li>
+                <li>Flatten into 1D array: [50 features total]</li>
+                <li>Return as numpy array with float32 dtype</li>
+            </ol>
+        </div>
+
+        <h3>Action Execution Logic</h3>
+        <div class="success-box">
+            <strong>BUY Action (action=1):</strong>
+            <ol>
+                <li>Calculate max shares possible with current balance</li>
+                <li>Buy all possible shares</li>
+                <li>Deduct cost + transaction fee from balance</li>
+                <li>Record trade in trade history</li>
+            </ol>
+        </div>
+
+        <div class="success-box">
+            <strong>SELL Action (action=2):</strong>
+            <ol>
+                <li>Sell all held shares</li>
+                <li>Add proceeds - transaction fee to balance</li>
+                <li>Set shares_held to 0</li>
+                <li>Record trade in trade history</li>
+            </ol>
+        </div>
+
+        <div class="warning-box">
+            <strong>HOLD Action (action=0):</strong>
+            <ol>
+                <li>No trading action</li>
+                <li>Small penalty (-0.1) to encourage active trading</li>
+            </ol>
+        </div>
+
+        <h3>Reward Calculation</h3>
+        <div class="info-box">
+            <strong>Reward Process:</strong>
+            <ol>
+                <li>Calculate current net worth: balance + (shares_held × current_price)</li>
+                <li>Reward = net_worth_change (current - previous)</li>
+                <li>Update max_net_worth if new high</li>
+                <li>Return reward as float</li>
+            </ol>
+        </div>
+
+        <h2>Phase 3: Training Process</h2>
+
+        <h3>Step 5: Training Setup</h3>
+        <div class="highlight">
+            <strong>File:</strong> <code>src/train.py</code><br>
+            <strong>Data Loading Process:</strong>
+            <ol>
+                <li>Read AAPL.csv from data/historical/</li>
+                <li>Skip first 2 rows (header handling)</li>
+                <li>Convert Date column to datetime</li>
+                <li>Sort by date and reset index</li>
+                <li>Remove any NaN values</li>
+            </ol>
+        </div>
+
+        <h3>Environment Registration</h3>
+        <div class="info-box">
+            <strong>Registration Process:</strong>
+            <ol>
+                <li>Register custom environment with Ray RLlib</li>
+                <li>Create environment factory function</li>
+                <li>Pass DataFrame and configuration parameters</li>
+                <li>Make environment available for training</li>
+            </ol>
+        </div>
+
+        <h3>PPO Configuration</h3>
+        <div class="success-box">
+            <strong>Configuration Details:</strong>
+            <ol>
+                <li>Set up PPO algorithm with PyTorch framework</li>
+                <li>Configure neural network: [256, 256] hidden layers</li>
+                <li>Set hyperparameters:
+                    <ul>
+                        <li>Learning rate: 1e-4</li>
+                        <li>Gamma (discount): 0.99</li>
+                        <li>Batch size: 200</li>
+                        <li>Minibatch size: 64</li>
+                        <li>SGD iterations: 10</li>
+                    </ul>
+                </li>
+                <li>Enable evaluation every iteration</li>
+                <li>Set training to stop after 20 iterations</li>
+            </ol>
+        </div>
+
+        <h3>Step 6: Training Execution</h3>
+        <div class="highlight">
+            <strong>Training Process:</strong>
+            <ol>
+                <li>Ray initializes distributed computing</li>
+                <li>Create multiple environment instances</li>
+                <li>Agent interacts with environments:
+                    <ul>
+                        <li>Get observation (OHLCV window)</li>
+                        <li>Compute action using neural network</li>
+                        <li>Execute action in environment</li>
+                        <li>Receive reward and new observation</li>
+                    </ul>
+                </li>
+                <li>PPO updates policy using collected experiences</li>
+                <li>Evaluation runs periodically with exploration disabled</li>
+                <li>Checkpoints saved at end of training</li>
+            </ol>
+        </div>
+
+        <h3>Step 7: Logging & Monitoring</h3>
+        <div class="info-box">
+            <strong>File:</strong> <code>src/utils/logging_callback.py</code><br>
+            <strong>Logging Process:</strong>
+            <ol>
+                <li>Extract total reward for episode</li>
+                <li>Get final profit from environment info</li>
+                <li>Write to results/training_rewards.csv</li>
+                <li>Print episode summary to console</li>
+                <li>Create CSV file with headers if doesn't exist</li>
+            </ol>
+        </div>
+
+        <h2>Phase 4: Evaluation & Deployment</h2>
+
+        <h3>Step 8: Model Evaluation</h3>
+        <div class="highlight">
+            <strong>File:</strong> <code>src/run.py</code><br>
+            <strong>Evaluation Process:</strong>
+            <ol>
+                <li>Load trained model from checkpoint</li>
+                <li>Create fresh environment with same data</li>
+                <li>Run single episode without exploration</li>
+                <li>Agent makes decisions using learned policy</li>
+                <li>Environment renders trading actions</li>
+                <li>Calculate total reward and profit</li>
+                <li>Print final performance metrics</li>
+            </ol>
+        </div>
+    </section>
+
+    <section id="components">
+        <h1>5. Code Components</h1>
+
+        <h2>Core Files Structure</h2>
+        <pre><code>QuantTrader/
+├── config/
+│   ├── env.yaml                  # Trading environment parameters
+│   ├── train.yaml                # RL training hyperparameters
+│   └── logging.yaml              # Logging settings
+├── data/
+│   ├── historical/               # Downloaded data for training
+│   └── raw/                      # (Optional) raw tick-level data
+├── notebooks/
+│   ├── analysis.ipynb            # EDA and feature exploration
+│   └── results_visualization.ipynb   # Training result visualization
+├── src/
+│   ├── env/
+│   │   ├── stock_trading_env.py     # Gym-compatible trading environment
+│   │   └── utils.py                 # Performance metrics and helpers
+│   ├── data/
+│   │   ├── data_pipeline.py         # Data fetching (historical + real-time)
+│   │   ├── realtime_stream.py       # Real-time price streaming
+│   │   └── live_plot.py             # Live price plotting
+│   ├── agent/
+│   │   └── model.py                 # (Optional) custom model architecture
+│   ├── train.py                     # RLlib training script
+│   ├── run.py                       # Paper/live trading runner
+│   └── utils/
+│       └── logging_callback.py      # Training logging and callbacks
+├── tests/
+│   └── test_environment.py         # Unit tests
+├── requirements.txt                # Dependencies
+└── README.md</code></pre>
+
+        <h2>Key Classes and Functions</h2>
+
+        <h3>StockTradingEnv Class</h3>
+        <ul>
+            <li><strong>Purpose:</strong> Custom Gym environment for stock trading</li>
+            <li><strong>Key Methods:</strong>
+                <ul>
+                    <li><code>__init__()</code>: Initialize environment parameters</li>
+                    <li><code>reset()</code>: Reset environment to initial state</li>
+                    <li><code>step()</code>: Execute action and return new state</li>
+                    <li><code>_get_observation()</code>: Generate state representation</li>
+                    <li><code>render()</code>: Display current trading status</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>PPO Training Configuration</h3>
+        <ul>
+            <li><strong>Algorithm:</strong> Proximal Policy Optimization</li>
+            <li><strong>Framework:</strong> PyTorch</li>
+            <li><strong>Network:</strong> [256, 256] fully connected layers</li>
+            <li><strong>Activation:</strong> ReLU</li>
+            <li><strong>Optimizer:</strong> Adam with learning rate 1e-4</li>
+        </ul>
+
+        <h3>Data Pipeline Functions</h3>
+        <ul>
+            <li><code>fetch_data_yf()</code>: Download historical data from Yahoo Finance</li>
+            <li><code>fetch_real_time()</code>: Get real-time price data</li>
+            <li><code>stream_realtime_data()</code>: Continuous price streaming</li>
+            <li><code>stream_and_plot()</code>: Live price visualization</li>
+        </ul>
+    </section>
+
+    <section id="specs">
+        <h1>6. Technical Specifications</h1>
+
+        <h2>Environment Specifications</h2>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Action Space</td>
+                <td>Discrete(3)</td>
+                <td>[Hold, Buy, Sell]</td>
+            </tr>
+            <tr>
+                <td>Observation Space</td>
+                <td>Box(50,)</td>
+                <td>10 time steps × 5 features (OHLCV)</td>
+            </tr>
+            <tr>
+                <td>Initial Balance</td>
+                <td>$10,000</td>
+                <td>Starting portfolio value</td>
+            </tr>
+            <tr>
+                <td>Transaction Cost</td>
+                <td>0.1%</td>
+                <td>Fee per trade</td>
+            </tr>
+            <tr>
+                <td>Window Size</td>
+                <td>10</td>
+                <td>Time steps for state representation</td>
+            </tr>
+            <tr>
+                <td>Data Features</td>
+                <td>OHLCV</td>
+                <td>Open, High, Low, Close, Volume</td>
+            </tr>
+        </table>
+
+        <h2>Neural Network Architecture</h2>
+        <pre><code>Input Layer: 50 features (OHLCV × 10 time steps)
+    ↓
+Hidden Layer 1: 256 neurons (ReLU activation)
+    ↓
+Hidden Layer 2: 256 neurons (ReLU activation)
+    ↓
+Output Layer: 3 neurons (action probabilities)</code></pre>
+
+        <h2>Training Parameters</h2>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Algorithm</td>
+                <td>PPO (Proximal Policy Optimization)</td>
+            </tr>
+            <tr>
+                <td>Learning Rate</td>
+                <td>1e-4</td>
+            </tr>
+            <tr>
+                <td>Discount Factor (γ)</td>
+                <td>0.99</td>
+            </tr>
+            <tr>
+                <td>Batch Size</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>Minibatch Size</td>
+                <td>64</td>
+            </tr>
+            <tr>
+                <td>SGD Iterations</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>Training Episodes</td>
+                <td>20 iterations</td>
+            </tr>
+            <tr>
+                <td>Evaluation</td>
+                <td>Every iteration</td>
+            </tr>
+        </table>
+
+        <h2>Data Specifications</h2>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Source</td>
+                <td>Yahoo Finance (yfinance)</td>
+            </tr>
+            <tr>
+                <td>Symbol</td>
+                <td>AAPL (Apple Inc.)</td>
+            </tr>
+            <tr>
+                <td>Time Period</td>
+                <td>2018-01-01 to present</td>
+            </tr>
+            <tr>
+                <td>Interval</td>
+                <td>Daily for training, 1-minute for real-time</td>
+            </tr>
+            <tr>
+                <td>Features</td>
+                <td>OHLCV (Open, High, Low, Close, Volume)</td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="config">
+        <h1>7. Configuration Management</h1>
+
+        <h2>Environment Configuration</h2>
+        <div class="highlight">
+            <strong>File:</strong> <code>config/env.yaml</code>
+            <pre><code># Trading environment parameters
+initial_balance: 10000
+transaction_cost: 0.001
+window_size: 10</code></pre>
+        </div>
+
+        <h2>Training Configuration</h2>
+        <div class="highlight">
+            <strong>File:</strong> <code>config/train.yaml</code>
+            <pre><code># RL training hyperparameters
+algorithm: PPO
+lr: 0.0001
+gamma: 0.99
+batch_size: 32</code></pre>
+        </div>
+
+        <h2>Logging Configuration</h2>
+        <div class="highlight">
+            <strong>File:</strong> <code>config/logging.yaml</code>
+            <pre><code># Logging settings
+log_level: INFO
+log_file: logs/training.log</code></pre>
+        </div>
+    </section>
+
+    <section id="deployment">
+        <h1>8. Deployment Guide</h1>
+
+        <h2>Local Setup</h2>
+        <div class="success-box">
+            <pre><code># 1. Clone repository
+git clone https://github.com/HERPESME/PYTHON-AUTOMATION.git
+cd QuantTrader_Project
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Fetch historical data
+python src/data/data_pipeline.py
+
+# 4. Train the agent
+python -m src.train
+
+# 5. Evaluate the model
+python -m src.run</code></pre>
+        </div>
+
+        <h2>Docker Deployment</h2>
+        <div class="info-box">
+            <pre><code># Build Docker image
+docker build -t quanttrader .
+
+# Run container
+docker run quanttrader
+
+# Mount local data folder
+docker run -v $(pwd)/data:/app/data quanttrader</code></pre>
+        </div>
+
+        <h2>Cloud Deployment</h2>
+        <div class="warning-box">
+            <strong>Supported Platforms:</strong>
+            <ul>
+                <li>Amazon EC2</li>
+                <li>Google Cloud Platform</li>
+                <li>Microsoft Azure</li>
+                <li>Heroku (via Docker)</li>
+                <li>Render</li>
+                <li>DigitalOcean</li>
+            </ul>
+        </div>
+
+        <h2>Monitoring and Logging</h2>
+        <ul>
+            <li><strong>Training Logs:</strong> <code>results/training_rewards.csv</code></li>
+            <li><strong>Model Checkpoints:</strong> <code>ray_results/</code></li>
+            <li><strong>Performance Metrics:</strong> Episode rewards, profits, portfolio growth</li>
+            <li><strong>Visualization:</strong> Jupyter notebooks for analysis</li>
+        </ul>
+
+        <h2>Performance Metrics</h2>
+        <h3>Key Performance Indicators</h3>
+        <ol>
+            <li><strong>Total Reward:</strong> Cumulative reward across episodes</li>
+            <li><strong>Portfolio Growth:</strong> Net worth increase over time</li>
+            <li><strong>Sharpe Ratio:</strong> Risk-adjusted returns</li>
+            <li><strong>Maximum Drawdown:</strong> Largest peak-to-trough decline</li>
+            <li><strong>Win Rate:</strong> Percentage of profitable trades</li>
+            <li><strong>Transaction Frequency:</strong> Number of trades per episode</li>
+        </ol>
+
+        <h3>Evaluation Metrics</h3>
+        <ul>
+            <li><strong>Episodic Reward:</strong> Total reward per training episode</li>
+            <li><strong>Final Profit:</strong> Portfolio value minus initial balance</li>
+            <li><strong>Action Distribution:</strong> Frequency of buy/hold/sell actions</li>
+            <li><strong>Portfolio Volatility:</strong> Standard deviation of returns</li>
+        </ul>
+
+        <h2>Troubleshooting Guide</h2>
+        <h3>Common Issues</h3>
+        <ol>
+            <li><strong>Data Loading Errors:</strong> Check Yahoo Finance API connectivity</li>
+            <li><strong>Training Convergence:</strong> Adjust learning rate or network architecture</li>
+            <li><strong>Memory Issues:</strong> Reduce batch size or window size</li>
+            <li><strong>Performance Issues:</strong> Use GPU acceleration if available</li>
+        </ol>
+
+        <h3>Debugging Tips</h3>
+        <ul>
+            <li>Enable verbose logging in configuration</li>
+            <li>Use smaller datasets for initial testing</li>
+            <li>Monitor training progress with TensorBoard</li>
+            <li>Validate environment behavior with unit tests</li>
+        </ul>
+
+        <h2>Future Enhancements</h2>
+        <h3>Planned Features</h3>
+        <ol>
+            <li><strong>Multi-Asset Trading:</strong> Support for multiple stocks/ETFs</li>
+            <li><strong>Advanced Technical Indicators:</strong> RSI, MACD, Bollinger Bands</li>
+            <li><strong>Risk Management:</strong> Stop-loss, position sizing</li>
+            <li><strong>Market Regime Detection:</strong> Bull/bear/sideways market identification</li>
+            <li><strong>News Sentiment Integration:</strong> Real-time news analysis</li>
+            <li><strong>Options/Futures Trading:</strong> Derivatives support</li>
+        </ol>
+
+        <h3>Performance Optimizations</h3>
+        <ol>
+            <li><strong>Parallel Training:</strong> Multi-GPU support</li>
+            <li><strong>Data Preprocessing:</strong> Caching and optimization</li>
+            <li><strong>Model Compression:</strong> Quantization and pruning</li>
+            <li><strong>Real-time Inference:</strong> Low-latency prediction</li>
+        </ol>
+    </section>
+
+    <div class="footer">
+        <p><strong>QuantTrader - Reinforcement Learning Trading Agent</strong></p>
+        <p>Built with PyTorch + Ray RLlib</p>
+        <p><em>This documentation provides a comprehensive overview of the QuantTrader system, including architecture, data flow, implementation details, and deployment instructions.</em></p>
+    </div>
+
+    <script>
+        // Set timestamp
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+        
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
